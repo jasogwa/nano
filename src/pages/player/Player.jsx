@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Wrapper, Control, Button, Title } from "./style";
+import { Container, Wrapper, Button, Title, Wapper1 } from "./style";
 
 const Player = () => {
   var player;
@@ -17,7 +17,7 @@ const Player = () => {
           h5live: {
             rtmp: {
               streamname: streamNames[0],
-            }
+            },
           },
         },
         {
@@ -26,7 +26,7 @@ const Player = () => {
           h5live: {
             rtmp: {
               streamname: streamNames[1],
-            }
+            },
           },
         },
         {
@@ -35,7 +35,7 @@ const Player = () => {
           h5live: {
             rtmp: {
               streamname: streamNames[2],
-            }
+            },
           },
         },
       ],
@@ -84,23 +84,38 @@ const Player = () => {
 
   function pause() {
     if (!player) {
-      player = new window.NanoPlayer('playerDiv');
+      player = new window.NanoPlayer("playerDiv");
     }
     player.pause();
   }
 
   function play() {
     if (!player) {
-      player = new window.NanoPlayer('playerDiv');
+      player = new window.NanoPlayer("playerDiv");
     }
     player.play();
   }
 
   function unmute() {
     if (!player) {
-      player = new window.NanoPlayer('playerDiv');
+      player = new window.NanoPlayer("playerDiv");
     }
     player.unmute();
+  }
+
+  function fullscreen() {
+    if (!player) {
+      player = new window.NanoPlayer("playerDiv");
+    }
+    player
+      .requestFullscreen()
+      .then(function () {
+        console.log("requestFullscreen resolved");
+      })
+      .catch(function (err) {
+        // error reasons can be 'denied' or 'disabled' (e.g. in audio player mode)
+        console.log("requestFullscreen rejected: " + err.reason);
+      });
   }
 
   useEffect(() => {
@@ -108,17 +123,20 @@ const Player = () => {
   }, []);
 
   return (
-    <Container>
-        <Title>H5Live Video Player</Title><hr/>
+    <>
+      <Container>
+        <Title>H5Live Video Player</Title>
+        <div id="playerDiv" />
         <Wrapper>
-          <div id="playerDiv"></div>
+          <Wapper1>
+            <Button onClick={play}>play</Button>
+            <Button onClick={pause}>pause</Button>
+            <Button onClick={fullscreen}>fullscreen</Button>
+          </Wapper1>
+          <Button onClick={unmute}>unmute</Button>
         </Wrapper>
-        <Control>
-          <Button  onClick={play} >play</Button>
-          <Button  onClick={pause} >pause</Button>
-          <Button  onClick={unmute} >unmute</Button>
-        </Control>
-    </Container>
+      </Container>
+    </>
   );
 };
 
