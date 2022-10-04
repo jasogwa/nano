@@ -1,7 +1,7 @@
 ## Installation
 
 ```bash
-cd nanocosmos/
+cd nano/
 npm install
 ```
 ## Available Scripts
