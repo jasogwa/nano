@@ -83,7 +83,11 @@ const Player = () => {
   }
 
   function pause() {
-    if(player){
+    if (!player) {
+      player = new window.NanoPlayer('playerDiv');
+    }
+    player.pause();
+    /*if(player){
       player.setup(config)
         .then( function (config) {
             config.pause()
@@ -91,7 +95,7 @@ const Player = () => {
             console.log(error.message);
           }
         );
-    }
+    }*/
   }
 
   function play() {
