@@ -87,39 +87,20 @@ const Player = () => {
       player = new window.NanoPlayer('playerDiv');
     }
     player.pause();
-    /*if(player){
-      player.setup(config)
-        .then( function (config) {
-            config.pause()
-          }, function (error) {
-            console.log(error.message);
-          }
-        );
-    }*/
   }
 
   function play() {
-    if(player){
-      player.setup(config)
-        .then( function (config) {
-            config.play()
-          }, function (error) {
-            console.log(error.message);
-          }
-        );
+    if (!player) {
+      player = new window.NanoPlayer('playerDiv');
     }
+    player.play();
   }
 
   function unmute() {
-    if(player){
-      player.setup(config)
-        .then( function (config) {
-            config.unmute()
-          }, function (error) {
-            console.log(error.message);
-          }
-        );
+    if (!player) {
+      player = new window.NanoPlayer('playerDiv');
     }
+    player.unmute();
   }
 
   useEffect(() => {
