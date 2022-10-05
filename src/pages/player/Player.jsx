@@ -10,7 +10,6 @@ import {
 } from "./style";
 
 const Player = () => {
-  const [muted , setMute] = useState(true);
   var player;
   var streamNames = ["HX26g-NRbx9", "HX26g-uVn3M", "HX26g-VbAxm"];
 
@@ -114,8 +113,6 @@ const Player = () => {
     }
     try {
       player.unmute();
-      setMute(false);
-      console.log(muted);
     } catch (error) {
       console.log(error);
     }
@@ -127,8 +124,6 @@ const Player = () => {
     }
     try {
       player.mute();
-      setMute(true);
-      console.log(muted);
     } catch (error) {
       console.log(error);
     }
@@ -177,8 +172,8 @@ const Player = () => {
         <WrapLeft>
           <Button onClick={play}>play</Button>
           <Button onClick={pause}>pause</Button>
-          {muted ? <Button onClick={unmute}>unmute</Button>:null}
-          {!muted ? <Button onClick={mute}>mute</Button>:null}
+          {<Button onClick={unmute}>unmute</Button>}
+          {<Button onClick={mute}>mute</Button>}
         </WrapLeft>
         <WrapRight>
           <Button onClick={fullscreen}>fullscreen</Button>
