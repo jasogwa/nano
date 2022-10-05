@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Container, Wrapper, Button, Title, Wapper1 } from "./style";
+import { Container, Wrapper, Button, Title, Video, WrapLeft, WrapRight } from "./style";
 
 const Player = () => {
   var player;
@@ -86,21 +86,33 @@ const Player = () => {
     if (!player) {
       player = new window.NanoPlayer("playerDiv");
     }
-    player.pause();
+    try {
+      player.pause();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function play() {
     if (!player) {
       player = new window.NanoPlayer("playerDiv");
     }
-    player.play();
+    try {
+      player.play();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function unmute() {
     if (!player) {
       player = new window.NanoPlayer("playerDiv");
     }
-    player.unmute();
+    try {
+      player.unmute();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function fullscreen() {
@@ -125,16 +137,18 @@ const Player = () => {
   return (
     <>
       <Container>
-        <Title>H5Live Video Player</Title>
-        <div id="playerDiv" />
-        <Wrapper>
-          <Wapper1>
-            <Button onClick={play}>play</Button>
-            <Button onClick={pause}>pause</Button>
-            <Button onClick={fullscreen}>fullscreen</Button>
-          </Wapper1>
-          <Button onClick={unmute}>unmute</Button>
-        </Wrapper>
+          <Title>H5Live Video Player</Title>
+          <Video id="playerDiv" />
+          <Wrapper>
+            <WrapLeft>
+              <Button onClick={play}>play</Button>
+              <Button onClick={pause}>pause</Button>
+              <Button onClick={fullscreen}>fullscreen</Button>
+            </WrapLeft>
+            <WrapRight>
+              <Button onClick={unmute}>unmute</Button>
+            </WrapRight>
+          </Wrapper>
       </Container>
     </>
   );
