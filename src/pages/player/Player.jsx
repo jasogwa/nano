@@ -177,7 +177,7 @@ const Player = () => {
         </WrapLeft>
         <WrapRight>
           <Button onClick={fullscreen}>fullscreen</Button>
-          <Button onClick={switchStream}>switch</Button>
+         { /*<Button onClick={switchStream}>switch</Button>*/}
         </WrapRight>
       </Wrapper>
     </Container>
