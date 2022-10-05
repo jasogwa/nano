@@ -1,5 +1,13 @@
 import React, { useEffect } from "react";
-import { Container, Wrapper, Button, Title, Video, WrapLeft, WrapRight } from "./style";
+import {
+  Container,
+  Wrapper,
+  Button,
+  Title,
+  Video,
+  WrapLeft,
+  WrapRight,
+} from "./style";
 
 const Player = () => {
   var player;
@@ -56,17 +64,11 @@ const Player = () => {
       displayMutedAutoplay: true,
       width: "auto",
       height: "auto",
-    },
-    metrics: {
-      accountId: "nanocosmos1",
-      accountKey: "nc1wj472649fkjah",
-      userId: "nanoplayer-demo",
-      eventId: "nanocosmos-demo",
-      statsInterval: 10,
-      customField1: "demo",
-      customField2: "public",
-      customField3: "online resource",
-    },
+      buttonCursor: "pointer",
+      backgroundColor: "#ed7d0e",
+      symbolColor : "#ed7d0e",
+      controlBarColor : "#000000FF"
+    }
   };
 
   function initPlayer() {
@@ -130,6 +132,22 @@ const Player = () => {
       });
   }
 
+  function switchStream() {
+    if (!player) {
+      player = new window.NanoPlayer("playerDiv");
+    }
+    player.switchStream(1).then(
+      function (config) {
+        console.log(
+          "switch stream initialized with config: " + JSON.stringify(config)
+        );
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+  }
+
   useEffect(() => {
     initPlayer(config);
   }, []);
@@ -137,18 +155,19 @@ const Player = () => {
   return (
     <>
       <Container>
-          <Title>H5Live Video Player</Title>
-          <Video id="playerDiv" />
-          <Wrapper>
-            <WrapLeft>
-              <Button onClick={play}>play</Button>
-              <Button onClick={pause}>pause</Button>
-              <Button onClick={fullscreen}>fullscreen</Button>
-            </WrapLeft>
-            <WrapRight>
-              <Button onClick={unmute}>unmute</Button>
-            </WrapRight>
-          </Wrapper>
+        <Title>H5Live Video Player</Title>
+        <Video id="playerDiv" />
+        <Wrapper>
+          <WrapLeft>
+            <Button onClick={play}>play</Button>
+            <Button onClick={pause}>pause</Button>
+            <Button onClick={fullscreen}>fullscreen</Button>
+          </WrapLeft>
+          <WrapRight>
+            <Button onClick={switchStream}>switch</Button>
+            <Button onClick={unmute}>unmute</Button>
+          </WrapRight>
+        </Wrapper>
       </Container>
     </>
   );
