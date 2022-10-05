@@ -4,7 +4,7 @@
 cd nano/
 npm install
 ```
-## Available Scripts
+## Run
 
 In the project directory, you can run:
 
