@@ -10,6 +10,7 @@ import {
 } from "./style";
 
 const Player = () => {
+  const [muted , setMute] = useState(true);
   var player;
   var streamNames = ["HX26g-NRbx9", "HX26g-uVn3M", "HX26g-VbAxm"];
 
@@ -70,13 +71,14 @@ const Player = () => {
       controlBarColor: "#000000FF",
     },
   };
+  const [conf , setConf] = useState(config);
 
   function initPlayer() {
     player = new window.NanoPlayer("playerDiv");
-    player.setup(config).then(
-      function (config) {
+    player.setup(conf).then(
+      function (conf) {
         console.log("setup success");
-        console.log("config: " + JSON.stringify(config));
+        console.log("config: " + JSON.stringify(conf));
       },
       function (error) {
         console.log(error.message);
@@ -112,6 +114,21 @@ const Player = () => {
     }
     try {
       player.unmute();
+      setMute(false);
+      console.log(muted);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  function mute() {
+    if (!player) {
+      return;
+    }
+    try {
+      player.mute();
+      setMute(true);
+      console.log(muted);
     } catch (error) {
       console.log(error);
     }
@@ -137,9 +154,9 @@ const Player = () => {
       return;
     }
     player.switchStream(1).then(
-      function (config) {
+      function (conf) {
         console.log(
-          "switch stream initialized with config: " + JSON.stringify(config)
+          "switch stream initialized with config: " + JSON.stringify(conf)
         );
       },
       function (error) {
@@ -149,7 +166,7 @@ const Player = () => {
   }
 
   useEffect(() => {
-    initPlayer(config);
+    initPlayer(conf);
   }, []);
 
   return (
@@ -160,7 +177,8 @@ const Player = () => {
         <WrapLeft>
           <Button onClick={play}>play</Button>
           <Button onClick={pause}>pause</Button>
-          <Button onClick={unmute}>unmute</Button>
+          {muted ? <Button onClick={unmute}>unmute</Button>:null}
+          {!muted ? <Button onClick={mute}>mute</Button>:null}
         </WrapLeft>
         <WrapRight>
           <Button onClick={fullscreen}>fullscreen</Button>
