@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Wrapper,
@@ -52,7 +52,7 @@ const Player = () => {
           rule: "deviationOfMean2",
         },
       },
-      startIndex: 2,
+      startIndex: 0,
     },
     playback: {
       autoplay: true,
@@ -69,15 +69,18 @@ const Player = () => {
       symbolColor: "#ed7d0e",
       controlBarColor: "#000000FF",
     },
+    events: {
+      onUnmute: true,
+      onMute: false,
+    },
   };
-  const [conf , setConf] = useState(config);
 
   function initPlayer() {
     player = new window.NanoPlayer("playerDiv");
-    player.setup(conf).then(
-      function (conf) {
+    player.setup(config).then(
+      function (success) {
         console.log("setup success");
-        console.log("config: " + JSON.stringify(conf));
+        console.log("config: " + JSON.stringify(success));
       },
       function (error) {
         console.log(error.message);
@@ -113,6 +116,8 @@ const Player = () => {
     }
     try {
       player.unmute();
+      document.getElementById("unmute").style.display = "none";
+      document.getElementById("mute").style.display = "";
     } catch (error) {
       console.log(error);
     }
@@ -124,6 +129,8 @@ const Player = () => {
     }
     try {
       player.mute();
+      document.getElementById("unmute").style.display = "";
+      document.getElementById("mute").style.display = "none";
     } catch (error) {
       console.log(error);
     }
@@ -149,9 +156,9 @@ const Player = () => {
       return;
     }
     player.switchStream(1).then(
-      function (conf) {
+      function (config) {
         console.log(
-          "switch stream initialized with config: " + JSON.stringify(conf)
+          "switch stream initialized with config: " + JSON.stringify(config)
         );
       },
       function (error) {
@@ -161,7 +168,7 @@ const Player = () => {
   }
 
   useEffect(() => {
-    initPlayer(conf);
+    initPlayer();
   }, []);
 
   return (
@@ -172,12 +179,16 @@ const Player = () => {
         <WrapLeft>
           <Button onClick={play}>play</Button>
           <Button onClick={pause}>pause</Button>
-          {<Button onClick={unmute}>unmute</Button>}
-          {<Button onClick={mute}>mute</Button>}
+          <Button onClick={unmute} id="unmute" style={{ display: "" }}>
+            unmute
+          </Button>
+          <Button onClick={mute} id="mute" style={{ display: "none" }}>
+            mute
+          </Button>
         </WrapLeft>
         <WrapRight>
           <Button onClick={fullscreen}>fullscreen</Button>
-         { /*<Button onClick={switchStream}>switch</Button>*/}
+          <Button onClick={switchStream}>switch</Button>
         </WrapRight>
       </Wrapper>
     </Container>
