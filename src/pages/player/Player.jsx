@@ -7,7 +7,11 @@ import {
   Video,
   WrapLeft,
   WrapRight,
+  Input,
 } from "./style";
+import {
+  Fullscreen, Tune, Pause, PlayArrow, VolumeOff, VolumeUp
+} from "@material-ui/icons";
 
 const Player = () => {
   var player;
@@ -177,18 +181,20 @@ const Player = () => {
       <Video id="playerDiv" />
       <Wrapper>
         <WrapLeft>
-          <Button onClick={play}>play</Button>
-          <Button onClick={pause}>pause</Button>
+          <Button onClick={fullscreen}><Fullscreen /></Button>
+          <Button onClick={play}><Pause /></Button>
+          <Button onClick={pause}><PlayArrow /></Button>
           <Button onClick={unmute} id="unmute" style={{ display: "" }}>
-            unmute
+            <VolumeOff />
           </Button>
           <Button onClick={mute} id="mute" style={{ display: "none" }}>
-            mute
+            <VolumeUp />
           </Button>
         </WrapLeft>
         <WrapRight>
-          <Button onClick={fullscreen}>fullscreen</Button>
-          <Button onClick={switchStream}>switch</Button>
+          
+          <Button onClick={switchStream}><Tune /></Button>
+          <Input type="range" min="0" max="100" id="faderVolume" />
         </WrapRight>
       </Wrapper>
     </Container>
