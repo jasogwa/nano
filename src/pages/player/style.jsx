@@ -32,9 +32,9 @@ export const WrapRight = styled.div`
 export const Button = styled.button`
   color: #ed7d0e;
   font-size: 1em;
-  margin-right: 1em;
+  margin-right: 0.8em;
   margin-top: 3px;
-  padding: 0.25em 1em;
+  padding: 0.2em 0.5em;
   border: 2px solid #ed7d0e;
   border-radius: 3px;
   cursor: pointer;
@@ -42,4 +42,11 @@ export const Button = styled.button`
     background-color: #ed7d0e;
     color: white;
   }
+`;
+
+export const Input = styled.input`
+    accent-color: #ed7d0e;
+    border: solid 1px #82CFD0;
+    color: #13bba4;
+    background: #ed7d0e;
 `;
