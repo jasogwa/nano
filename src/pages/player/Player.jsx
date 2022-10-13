@@ -171,6 +171,20 @@ const Player = () => {
     );
   }
 
+  function setVolume(e, value) {
+    console.log(value)
+    if (!player) {
+        return;
+    }
+    if (value < 0) {
+        value = 0;
+    } else if (value > 100) {
+        value = 100;
+    }
+    var volume = value / 100;
+    player.setVolume(volume);
+  }
+
   useEffect(() => {
     initPlayer();
   }, []);
@@ -192,9 +206,15 @@ const Player = () => {
           </Button>
         </WrapLeft>
         <WrapRight>
-          
           <Button onClick={switchStream}><Tune /></Button>
-          <Input type="range" min="0" max="100" id="faderVolume" />
+          <Input 
+            onInput={(e)=>setVolume(null, e.target.value)}
+            onChange={(e)=>setVolume(null, e.target.value)}
+            type="range" 
+            min="0" 
+            max="100" 
+            id="faderVolume" 
+          />
         </WrapRight>
       </Wrapper>
     </Container>
