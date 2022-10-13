@@ -45,8 +45,9 @@ export const Button = styled.button`
 `;
 
 export const Input = styled.input`
-    accent-color: #ed7d0e;
-    border: solid 1px #82CFD0;
-    color: #13bba4;
-    background: #ed7d0e;
+  accent-color: #ed7d0e;
+  border: solid 1px #82cfd0;
+  color: #13bba4;
+  background: #ed7d0e;
+  cursor: pointer;
 `;
