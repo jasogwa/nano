@@ -79,10 +79,7 @@ const Player = () => {
       symbolColor: "#ed7d0e",
       controlBarColor: "#000000FF",
     },
-    events: {
-      onUnmute: true,
-      onMute: false,
-    },
+    events: {},
   };
 
   function initPlayer() {
