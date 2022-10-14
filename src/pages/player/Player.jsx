@@ -15,7 +15,7 @@ import {
   PlayArrow,
   VolumeOff,
   VolumeUp,
-  BrightnessLowSharp
+  BrightnessLowSharp,
 } from "@material-ui/icons";
 import { LightModeSharp } from "@mui/icons-material";
 
@@ -79,10 +79,7 @@ const Player = () => {
       symbolColor: "#ed7d0e",
       controlBarColor: "#000000FF",
     },
-    events: {
-      onUnmute: true,
-      onMute: false,
-    },
+    events: {},
   };
 
   function initPlayer() {
@@ -166,7 +163,7 @@ const Player = () => {
     }
     player.switchStream(1).then(
       function (config) {
-        console.log("Brightness: "+1);
+        console.log("Brightness: " + 1);
       },
       function (error) {
         console.log(error);
@@ -180,7 +177,7 @@ const Player = () => {
     }
     player.switchStream(2).then(
       function (config) {
-        console.log("Brightness: "+2);
+        console.log("Brightness: " + 2);
       },
       function (error) {
         console.log(error);
