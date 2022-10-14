@@ -11,12 +11,13 @@ import {
 } from "./style";
 import {
   Fullscreen,
-  Tune,
   Pause,
   PlayArrow,
   VolumeOff,
   VolumeUp,
+  BrightnessLowSharp
 } from "@material-ui/icons";
+import { LightModeSharp } from "@mui/icons-material";
 
 const Player = () => {
   var player;
@@ -155,20 +156,31 @@ const Player = () => {
         console.log("requestFullscreen resolved");
       })
       .catch(function (err) {
-        // error reasons can be 'denied' or 'disabled' (e.g. in audio player mode)
         console.log("requestFullscreen rejected: " + err.reason);
       });
   }
 
-  function switchStream() {
+  function switchStream_1() {
     if (!player) {
       return;
     }
     player.switchStream(1).then(
       function (config) {
-        console.log(
-          "switch stream initialized with config: " + JSON.stringify(config)
-        );
+        console.log("Brightness: "+1);
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+  }
+
+  function switchStream_2() {
+    if (!player) {
+      return;
+    }
+    player.switchStream(2).then(
+      function (config) {
+        console.log("Brightness: "+2);
       },
       function (error) {
         console.log(error);
@@ -216,8 +228,11 @@ const Player = () => {
           </Button>
         </WrapLeft>
         <WrapRight>
-          <Button onClick={switchStream}>
-            <Tune />
+          <Button onClick={switchStream_2}>
+            <BrightnessLowSharp />
+          </Button>
+          <Button onClick={switchStream_1}>
+            <LightModeSharp />
           </Button>
           <Input
             onInput={(e) => setVolume(null, e.target.value)}
