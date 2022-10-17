@@ -79,7 +79,18 @@ const Player = () => {
       symbolColor: "#ed7d0e",
       controlBarColor: "#000000FF",
     },
-    events: {},
+    events: {
+      onMute : function (event) {
+        console.log('Muted with volume: ' + event.data.volume);
+        document.getElementById("unmute").style.display = "";
+        document.getElementById("mute").style.display = "none";
+      },
+      onUnmute : function (event) {
+        console.log('OnUnMuted with volume: ' + event.data.volume);
+        document.getElementById("unmute").style.display = "none";
+        document.getElementById("mute").style.display = "";
+      }
+    },
   };
 
   function initPlayer() {
@@ -123,8 +134,7 @@ const Player = () => {
     }
     try {
       player.unmute();
-      document.getElementById("unmute").style.display = "none";
-      document.getElementById("mute").style.display = "";
+
     } catch (error) {
       console.log(error);
     }
@@ -136,8 +146,6 @@ const Player = () => {
     }
     try {
       player.mute();
-      document.getElementById("unmute").style.display = "";
-      document.getElementById("mute").style.display = "none";
     } catch (error) {
       console.log(error);
     }
